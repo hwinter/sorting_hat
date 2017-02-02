@@ -1,6 +1,6 @@
 import sort_resumes as sr
 import numpy as np
-from random import randint
+from random import randint,shuffle
 
 
 
@@ -35,7 +35,7 @@ class sort_adv:
 
 #assign people to their first or second choice (through all loop)
     def assign(self,prior): #prior(ity) of assigning reviewer
-         for i in self.obj.classreu.keys():
+         for i in shuffle(self.obj.classreu.keys()): #assign in random order
             proj = self.obj.classreu[i].proj[prior]    
             padv =  self.obj.advisors[proj] #priciple advisiors for REU project
 
