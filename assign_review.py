@@ -54,12 +54,12 @@ def main(argv):
         elif opt in ("-l","--loop"):
             loop = arg
 
-    try:
-        obj = rrr.sort_adv(filename=inpf,outf=outf,reviewers=revs,loop=loop.split(","))
-        obj.run_all()
-    except:
-        print 'Invalid input'
-        print helpinfo
+#    try:
+    obj = rrr.sort_adv(filename=inpf,outf=outf,reviewers=revs,loop=loop.split(","))
+    obj.run_all()
+#    except:
+#        print 'Invalid input'
+#        print helpinfo
 
 
 
