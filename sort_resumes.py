@@ -16,7 +16,15 @@ class stud_resumes:
         self.classreu = {} #dictionary containing class for each reu student
 
     def read_file(self):
-        self.fdata = ascii.read(self.fname,delimiter=',')
+
+#set up so it reads directly from download (i.e. ignoring none standard characters
+
+        self.fstri = open(self.fname,'r')
+        itxt = self.fstri.readlines() #should be all one line due to formating
+        otxt = itxt[0].decode('utf-8','ignore')
+       
+
+        self.fdata = ascii.read(otxt)
         self.columns = self.fdata.colnames
 
     def uniq_projects(self):
