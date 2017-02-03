@@ -6,12 +6,13 @@ import sys,getopt
 
 def main(argv):
     inargs1 = 'hf:o:r:l'
-    snargs1 = inargs1.split(':')
+    snargs1 = inargs1[1:].split(':')
     inargs2 = ['infile','outfile','reviewers','loop'] 
 
     helpinfo = "assign_review.py is a command line utility which class the class sort_adv"
     helpinfo = helpinfo+"The command line takes four arguments; however, only one is required."
-    helpinfo = helpinfo+"The required input is the file with preferences (-f or --infile)."
+    helpinfo = helpinfo+"The required input is the file with preferences (-f or --infile).\n"
+    helpinfo = helpinfo+"python assign_review.py "
 
     for i in range(len(inargs2)): helpinfo=helpinfo+' -'+snargs1[i]+' <--'+inargs2[i]+'>'
     helpinfo=helpinfo+'\n'
@@ -39,8 +40,10 @@ def main(argv):
     loop = "1st,2nd"
 
     for opt, arg in opts:
+        print opt
         if opt == '-h':
             print helpinfo
+            sys.exit()
 
         elif opt in ("-f","--infile"):
             inpf = arg
@@ -51,9 +54,12 @@ def main(argv):
         elif opt in ("-l","--loop"):
             loop = arg
 
-
-    obj = rrr.sort_adv(filename=inpf,outf=outf,reviewers=revs,loop=loop.split(","))
-    obj.run_all()
+    try:
+        obj = rrr.sort_adv(filename=inpf,outf=outf,reviewers=revs,loop=loop.split(","))
+        obj.run_all()
+    except:
+        print 'Invalid input'
+        print helpinfo
 
 
 
