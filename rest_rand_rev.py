@@ -16,7 +16,6 @@ class sort_adv:
 
     def get_info(self):
         self.obj = sr.stud_resumes(filename=self.fname,outf=self.oname,reviewers=self.revnum)
-        print self.obj
         self.obj.run_seperator() # run through class which creates advisors and reu students
 
 #loop assignment
@@ -37,10 +36,9 @@ class sort_adv:
     def assign(self,prior): #prior(ity) of assigning reviewer
          x = np.array(self.obj.classreu.keys())
          ind = np.arange(x.size)
-         ind = np.random.shuffle(ind)
+         np.random.shuffle(ind) #shuffles indices in place
          
-         x = x[ind]
-         print x
+         x = x[ind] #sort x by shuffled indices
 
          for i in x: #assign in random order
             proj = self.obj.classreu[i].proj[prior]    
