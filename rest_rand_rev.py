@@ -35,7 +35,14 @@ class sort_adv:
 
 #assign people to their first or second choice (through all loop)
     def assign(self,prior): #prior(ity) of assigning reviewer
-         for i in shuffle(self.obj.classreu.keys()): #assign in random order
+         x = np.array(self.obj.classreu.keys())
+         ind = np.arange(x.size)
+         ind = np.random.shuffle(ind)
+         
+         x = x[ind]
+         print x
+
+         for i in x: #assign in random order
             proj = self.obj.classreu[i].proj[prior]    
             padv =  self.obj.advisors[proj] #priciple advisiors for REU project
 
