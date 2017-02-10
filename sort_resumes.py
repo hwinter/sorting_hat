@@ -36,7 +36,7 @@ class stud_resumes:
     def dict_adv(self): #create a dictionary of advisors for a given project
         for i in self.projects: #loop overall projects
             proinfo = i.split('(') # assume advisors names are in parathensis
-            advisor = proinfo[-1].replace(')','').replace('Ed Hertz','Dr. Henry Winter III').replace('Peter Cheimets','Jenna Samra') #make advisor list for given project. staticed in replacements 
+            advisor = proinfo[-1].replace(')','').replace('Dr. Henry Winter III','Dr. Adam Foster').replace('Ed Hertz','Dr. Henry Winter III').replace('Peter Cheimets','Jenna Samra') #make advisor list for given project. staticed in replacements 
             advisor = np.array(advisor.split(' and ')) #put advisor text into numpy array
 
             self.advisors[i] = advisor #have it so projects call advisors from dictionary
