@@ -57,6 +57,11 @@ class sort_adv:
 
 #redistribute students to make a more even review process
     def res_studs(self):
+        """
+        Redistributes students and advisors so that each advisor reviews approximately the same number of students
+        """
+
+        #list of all advisors and the number of students they review
         alladv = self.obj.alladvis
         countlist = self.rev_count(alladv)
 
@@ -74,15 +79,18 @@ class sort_adv:
             oldrev = alladv[maxrev[maxdex]]
             newrev = alladv[minrev[mindex]]
            
-#remove last assigned student (will take 2nd choices away fist because order of adding)
+#Student to remove from advisors list
             moving_student = self.obj.classadv[oldrev].students[-1]
-            self.obj.classadv[oldrev].rem_reu(moving_student)
-            self.obj.classreu[moving_student].rem_rev(oldrev)
-
+#make sure the new advisor is not the same as the first advisor
+            if newrev not in self.obj.classreu[moving_student].revs: 
+#remove last assigned student (will take 2nd choices away fist because order of adding)
+                self.obj.classadv[oldrev].rem_reu(moving_student)
+                self.obj.classreu[moving_student].rem_rev(oldrev)
 #assign student to new reviewer
-            self.obj.classadv[newrev].add_reu(moving_student)
-            self.obj.classreu[moving_student].add_rev(newrev)
+                self.obj.classadv[newrev].add_reu(moving_student)
+                self.obj.classreu[moving_student].add_rev(newrev)
          
+#update the count list with the new assignment 
             countlist = self.rev_count(alladv)
 
 #write matching out to file
