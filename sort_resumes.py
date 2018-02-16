@@ -21,10 +21,11 @@ class stud_resumes:
 
         self.fstri = open(self.fname,'r')
         itxt = self.fstri.readlines() #should be all one line due to formating
-        otxt = itxt[0].decode('utf-8','ignore')
+        otxt = itxt[0].decode("utf-8",'replace').encode("windows-1252",'replace').decode("utf-8",'replace').replace(u'\ufffd','') #decode('utf-8','ignore')
+       
        
 
-        self.fdata = ascii.read(otxt)
+        self.fdata = ascii.read(otxt,guess=False,delimiter=',')
         self.columns = self.fdata.colnames
 
     def uniq_projects(self):
@@ -37,7 +38,7 @@ class stud_resumes:
         for i in self.projects: #loop overall projects
             proinfo = i.split('(') # assume advisors names are in parathensis
             #Add replace statements here as needed to include more people for review
-            advisor = proinfo[-1].replace('Savcheva and Karna','Savcheva and Karna and Prchlik').replace('Shen and Raymond','Shen and Raymond and Prchlik') #make advisor list for given project. staticed in replacements 
+            advisor = proinfo[-1].replace('Shen and Raymond','Shen and Raymond and Prchlik').replace(')','').replace('"','') #make advisor list for given project. staticed in replacements 
             advisor = np.array(advisor.split(' and ')) #put advisor text into numpy array
 
             self.advisors[i] = advisor #have it so projects call advisors from dictionary
