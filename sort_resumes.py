@@ -18,15 +18,19 @@ class stud_resumes:
     def read_file(self):
 
 #set up so it reads directly from download (i.e. ignoring none standard characters
-
-        self.fstri = open(self.fname,'r')
-        itxt = self.fstri.readlines() #should be all one line due to formating
-        otxt = itxt[0].decode("utf-8",'replace').encode("windows-1252",'replace').decode("utf-8",'replace').replace(u'\ufffd','') #decode('utf-8','ignore')
+        ### 2020-02-15 Henry "Trae" Winter ###
+        #The following was changed due to a change in how astropy.ascii.read accepts text input.
+        #self.fstri = open(self.fname,'r')
+        #itxt = self.fstri.readlines() #should be all one line due to formating
+        #otxt = itxt[0].decode("utf-8",'replace').encode("windows-1252",'replace').decode("utf-8",'replace').replace(u'\ufffd','') #decode('utf-8','ignore')
        
        
 
-        self.fdata = ascii.read(otxt,guess=False,delimiter=',')
+        ###self.fdata = ascii.read(otxt,guess=False,delimiter=',')
+        ###self.columns = self.fdata.colnames
+        self.fdata = ascii.read(self.fname,guess=False,delimiter=',')
         self.columns = self.fdata.colnames
+        ###End changes
 
     def uniq_projects(self):
         projects = [] # create a projects list
